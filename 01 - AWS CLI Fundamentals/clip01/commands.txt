@@ -1,0 +1,17 @@
+#--------------------------------------#
+# Module 1: AWS CLI Fundamentals
+#--------------------------------------#
+
+# Video 1: Getting Started with the AWS CLI
+
+# Creates a named profile to store your AWS credentials and configuration.
+aws configure --profile image-app-dev
+
+# List all AWS profiles
+aws configure list-profiles
+
+# Show values CLI is using for profile
+aws configure list --profile image-app-dev
+
+# Check user details (and verify AWS CLI is working)
+aws sts get-caller-identity --profile image-app-dev --output json 

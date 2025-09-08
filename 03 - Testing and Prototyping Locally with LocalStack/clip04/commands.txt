@@ -1,0 +1,6 @@
+
+# List all assets stored in S3 bucket
+./manage-assets.sh list
+
+# Retrieve an item from S3 called nebula-photo.jpg
+./manage-assets.sh fetch nebula-photo.jpg

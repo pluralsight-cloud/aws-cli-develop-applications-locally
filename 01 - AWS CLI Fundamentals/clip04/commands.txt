@@ -1,0 +1,15 @@
+# Video 4: Writing to DynamoDB via CLI
+# NOTE: Replace YOUR_UNIQUE_BUCKET_NAME with the actual name of your S3 bucket.
+
+# Example 1: Creating and Overwriting an item with put-item.
+aws dynamodb put-item \
+  --table-name image-metadata-table \
+  --item '{"ImageName": {"S": "cat-photo.jpg"}, "S3Url": {"S": "s3://YOUR_UNIQUE_BUCKET_NAME/cat-photo.jpg"}, "Status": {"S": "PROCESSED"}}' \
+  --profile image-app-dev
+
+# Example 2: Using a condition to prevent overwrites.
+aws dynamodb put-item \
+  --table-name image-metadata-table \
+  --item '{"ImageName": {"S": "dog-photo.jpg"}}' \
+  --profile image-app-dev \
+  --condition-expression "attribute_not_exists(ImageName)"

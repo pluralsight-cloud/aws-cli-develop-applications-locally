@@ -1,0 +1,28 @@
+# This CloudFormation template defines the AWS resources for our application.
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Resources for the Image Processor application (S3 Bucket, DynamoDB Table)
+
+Resources:
+  # An S3 bucket to store the images uploaded by the application.
+  ImageProcessorBucket:
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: Delete
+    Properties:
+      Tags:
+        - Key: Project
+          Value: ImageProcessor
+
+  # A DynamoDB table to store metadata about the images.
+  ImageMetadataTable:
+    Type: "AWS::DynamoDB::Table"
+    DeletionPolicy: Delete
+    Properties:
+      TableName: image-metadata-table
+      AttributeDefinitions:
+        - AttributeName: ImageName
+          AttributeType: S # S stands for String
+      KeySchema:
+        - AttributeName: ImageName
+          KeyType: HASH # HASH means this is the Partition Key
+      # Pay-per-request is cost-effective for development and unpredictable workloads.
+      BillingMode: PAY_PER_REQUEST

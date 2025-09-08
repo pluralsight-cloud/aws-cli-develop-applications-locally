@@ -1,0 +1,19 @@
+# Video 3: Advanced S3 Uploads with `aws s3 cp`
+# NOTE: Replace YOUR_UNIQUE_BUCKET_NAME with the actual name of your S3 bucket.
+
+# Get the name of the S3 bucket from the Cloud Formation stack
+aws cloudformation describe-stack-resource \
+  --profile image-app-dev \
+  --stack-name image-processor-app \
+  --logical-resource-id ImageProcessorBucket \
+  --query 'StackResourceDetail.PhysicalResourceId' \
+  --output text
+
+# Example 1: Basic file upload.
+aws s3 cp cat-photo.jpg s3://YOUR_UNIQUE_BUCKET_NAME --profile image-app-dev
+
+# Example 2: Upload a file with custom user-defined metadata.
+aws s3 cp dog-photo.jpg s3://YOUR_UNIQUE_BUCKET_NAME --profile image-app-dev --metadata "status=unprocessed,source=cli-upload"
+
+# Example 3: Recursively upload an entire directory.
+aws s3 cp new-images/ s3://YOUR_UNIQUE_BUCKET_NAME/new-images/ --recursive --profile image-app-dev

@@ -1,0 +1,7 @@
+# Video 2: Provisioning Your Environment with CloudFormation
+
+# Takes the template.yaml file and creates the defined resources in a CloudFormation stack.
+aws cloudformation deploy \
+  --profile image-app-dev \
+  --stack-name image-processor-app \
+  --template-file template.yaml

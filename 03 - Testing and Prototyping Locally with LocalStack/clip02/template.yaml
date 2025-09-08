@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Resources for the Image Processor application (S3 Bucket, DynamoDB Table)
+
+Resources:
+  ImageProcessorBucket:
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: image-processor-app-imageprocessorbucket-local
+      Tags:
+        - Key: Project
+          Value: ImageProcessor
+
+  ImageMetadataTable:
+    Type: "AWS::DynamoDB::Table"
+    DeletionPolicy: Delete
+    Properties:
+      TableName: image-metadata-table
+      AttributeDefinitions:
+        - AttributeName: ImageName
+          AttributeType: S # S stands for String
+      KeySchema:
+        - AttributeName: ImageName
+          KeyType: HASH # HASH means this is the Partition Key
+      BillingMode: PAY_PER_REQUEST

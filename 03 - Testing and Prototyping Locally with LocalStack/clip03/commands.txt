@@ -1,0 +1,7 @@
+
+
+# List items in local S3 bucket
+aws s3 ls s3://image-processor-app-imageprocessorbucket-local/ --endpoint-url http://localhost:4566 --profile image-app-dev
+
+# Scan DynamoDB table
+aws dynamodb scan --table-name image-metadata-table --endpoint-url http://localhost:4566 --profile image-app-dev

@@ -1,0 +1,9 @@
+
+# Local CloudFormation deploy
+aws cloudformation deploy --template-file template.yaml --stack-name image-processor-app --profile image-app-dev --endpoint-url http://localhost:4566
+
+# List buckets
+aws s3api list-buckets --query "Buckets[].Name" --output text --endpoint-url http://localhost:4566 --profile image-app-dev
+
+# List DynamoDB tables
+aws dynamodb list-tables --endpoint-url http://localhost:4566 --profile image-app-dev
